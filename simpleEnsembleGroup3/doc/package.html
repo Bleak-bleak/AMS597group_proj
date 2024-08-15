@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>simpleEnsembleGroup3</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+<style type="text/css">
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">simpleEnsembleGroup3</h1>
+
+
+
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(package)</span></code></pre></div>
+<div id="introduction" class="section level1">
+<h1>Introduction</h1>
+<p>This is a r package use to solve regression and classification task.
+Current version support linear, logistic, ridge, lasso, elastic and
+randomfores model. Package takes as input a response variable y and
+matrix of candidate predictors/independent variables X, where each
+column is a predictor. Package work for both binary y and continuous y.
+binary y must be a factor variable with level 0 and 1. The predictors X
+can be combinations of continuous, discrete and binary predictors. If y
+is binary, do classification task. otherwise do regression task.</p>
+</div>
+<div id="running-summaries" class="section level1">
+<h1>Running summaries</h1>
+<p>First the package check the number of predictors p and the number of
+size n.  If p &gt;&gt; n, package have the option that allows users to
+pre screening for top K most “informative” predictors to be included in
+the model.</p>
+<p>Second, do the task with the model</p>
+<p>Third, package have the option to perform “bagging” for linear,
+logistic, ridge, lasso and elastic net and randomforest models.</p>
+<p>Finally, package have the option that allows users to choose if they
+want “ensemble” learning.</p>
+<p>In classification task, the package evaluate the predicated y with
+accuracy. In regression task, the package evaluate the predicated y with
+mean square error.</p>
+</div>
+<div id="fucntion-detail" class="section level1">
+<h1>fucntion detail</h1>
+<div id="main.r" class="section level2">
+<h2>main.R</h2>
+<p>The main function is mainly served as user interface, it allows users
+to input their data and their command of what kinds of regression
+functions to implement on the data, moreover, it also checks the
+integrity of the data, it checks if the predictor data (mainly X) are in
+dataframe form, if not it will prompt the user to input it into one; it
+checks if the data has missing value; It checks if the regression model
+that user wanted to implement matches the one our package support
+(“linear&amp;logistic”, “ridge”, “lasso”, “elastic”, “randomforest”), if
+it matches, it will call the “function” package and perform
+corresponding operation; It checks if the predictors and outcome has the
+same size; It will prompt user to change the outcome data into 0 or 1 if
+data type is binary. It will prompt the user to choose the most
+informative predictors if the predictors have greater number than sample
+size; It will convert categorical data to dummy variables; It will also
+allow users to choose if they want to perform bagging learning on the
+data, if yes, the bagging function in the bagging package will be
+called. Lastly, it also prompts users to choose if they want to perform
+ensemble learning on the data, if yes, the ensemble.learn function in
+the ensemble package will be called. The input for the yes and no
+questions from users are managed by the interactive.check function in
+the “function” package.</p>
+<p>##function.R: This package mainly serves as a bridge between the user
+input and the other regression model function and other data learning
+functions.</p>
+<p>##ridge.R: This function will enable users to perform ridge
+regression. First call cv.glmnet, do cross-validation and select the
+best lambda. Then train the ridge model based on the best lambda.</p>
+<p>##lasso.R: This function will enable users to perform lasso
+regression. First call cv.glmnet, do cross-validation and select the
+best lambda. Then train the lasso model based on the best lambda.</p>
+<p>##elastic.R This function will enable users to perform elastic
+regression. Loop through alpha from 0 to 1 and do cross-validation tasks
+on each alpha value. For each alpha value, do elastic regression based
+on the best lambda value and compare with each other. Then choose the
+best elastic model based on the alpha value.</p>
+<p>##bagging.R: This function will promote users to determine the rounds
+of bootstrap sampling and perform the specific regression model for
+those rounds. Finally, this function will aggregate the final result by
+averaging from all the predicted values from previous rounds.</p>
+<p>##ensemble.R: This package enables ensemble learning for the data.
+The function ensemble.learn takes in X and y, and criteria and comb as
+input, criteria can be binary and continuous, comb are the different
+kinds of regression models that user wants to perform. For each
+regression model, it will perform bagging learning on them, the results
+from different will be combined into a matrix, each column is the result
+of a different regression model. If the criteria is binary, then the
+majority voting will be performed by calling the vote.max function, and
+result will be returned with values predicted and the accuracy. The
+vote.max function chooses the mode of the binary vector. If the criteria
+is continuous, then the the mean of matrix of each column will be found
+and returned as the predicted values, mean square error(MSR) will be
+calculated and it will return the user the MSR and the predicted
+value</p>
+</div>
+</div>
+<div id="output-detail" class="section level1">
+<h1>output detail</h1>
+<p>output is a list contain original(mandatory), bagging and ensemble
+result(optional). the original result is the default task with the
+model. bagging result is bagging task and ensemble result is the
+ensemble task. Each result contains two value, predicated y and the
+evaluated result(acc or msr based on the task).</p>
+</div>
+<div id="running-summaries-1" class="section level1">
+<h1>Running summaries</h1>
+<div id="case-1" class="section level2">
+<h2>case 1</h2>
+</div>
+<div id="case-2" class="section level2">
+<h2>case 2</h2>
+</div>
+<div id="case-3" class="section level2">
+<h2>case 3</h2>
+</div>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
